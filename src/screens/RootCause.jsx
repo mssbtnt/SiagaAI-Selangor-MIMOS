@@ -1,29 +1,72 @@
-// LANE 5 — Root Cause. Owner: Lane 5 only.
-//
-// ⚠️ The feeder-pillar story from the v2 blueprint is DEAD — it lived in the
-//    LAMPU dataset, which we dropped. Ship the drainage story below instead.
-//    See EXECUTION.md §5 Lane 5.
-//
-// TODO (Lane 5):
-//   1. Timeline chart for the selected cluster: complaints per month, with the
-//      first AIR BERTAKUNG date marked (data.clusters[i].first_water).
-//   2. Emerging-hotspot table from data.emerging (capability B).
-//   3. Wire cluster selection so the officer can compare localities.
+// LANE 5 — Trends & Root Cause.
 import { useState } from 'react'
+import {
+  Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,
+} from 'recharts'
 import { Card, Chip, cap } from '../ui'
+
+const growthLabel = (pct) => (pct === 999 ? 'Baharu' : `${pct > 0 ? '+' : ''}${pct}%`)
 
 export default function RootCause({ data }) {
   const [i, setI] = useState(0)
   const c = data.clusters[i]
+  const emerging = data.emerging || []
   if (!c) return <p className="text-stone-500">Tiada kelompok punca dijumpai.</p>
 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-xl font-bold">Punca sistemik: saliran → lubang jalan</h2>
+        <h2 className="text-xl font-bold">Trend dan hipotesis punca sistemik</h2>
         <p className="mt-1 max-w-3xl text-sm text-stone-600">
-          Papan pemuka biasa berkata "kawasan ini banyak lubang". SiagaAI berkata{' '}
-          <b>kenapa lubang itu sentiasa kembali</b>.
+          SiagaAI mengesan corak laporan yang meningkat dan hubungan berpotensi antara saliran
+          dengan kerosakan turapan untuk disahkan melalui pemeriksaan tapak.
+        </p>
+      </div>
+
+      <Card title="Isyarat awal — hotspot yang sedang meningkat">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px] text-sm">
+            <thead>
+              <tr className="border-b border-stone-200 text-left text-xs uppercase tracking-wider text-stone-500">
+                <th className="px-3 py-2">Kawasan</th>
+                <th className="px-3 py-2">Isu</th>
+                <th className="px-3 py-2 text-right">60 hari terkini</th>
+                <th className="px-3 py-2 text-right">60 hari sebelumnya</th>
+                <th className="px-3 py-2 text-right">Perubahan</th>
+              </tr>
+            </thead>
+            <tbody>
+              {emerging.map((x) => (
+                <tr key={`${x.area}-${x.issue}`} className="border-b border-stone-100">
+                  <td className="px-3 py-2 font-semibold">{cap(x.area)}</td>
+                  <td className="px-3 py-2">{cap(x.issue)}</td>
+                  <td className="px-3 py-2 text-right tabular-nums">{x.recent_n}</td>
+                  <td className="px-3 py-2 text-right tabular-nums">{x.prior_n}</td>
+                  <td className="px-3 py-2 text-right font-semibold tabular-nums text-red-700">
+                    {growthLabel(x.pct_change)}
+                  </td>
+                </tr>
+              ))}
+              {emerging.length === 0 && (
+                <tr>
+                  <td colSpan="5" className="px-3 py-6 text-center text-stone-500">
+                    Tiada isu meningkat yang memenuhi ambang pengesanan.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 border-t border-stone-100 pt-3 text-xs text-stone-500">
+          Isyarat awal membandingkan jumlah aduan dalam 60 hari terkini dengan 60 hari sebelumnya.
+          Ia mengesan pecutan laporan, bukan semata-mata jumlah aduan tertinggi.
+        </p>
+      </Card>
+
+      <div>
+        <h3 className="text-lg font-bold">Corak saliran dan kerosakan turapan</h3>
+        <p className="mt-1 max-w-3xl text-sm text-stone-600">
+          Pilih kawasan untuk melihat trend laporan setempat dan menentukan keutamaan pemeriksaan.
         </p>
       </div>
 
@@ -62,22 +105,37 @@ export default function RootCause({ data }) {
         </div>
 
         <div className="mt-5 rounded-lg border-l-4 border-amber-500 bg-amber-50 p-4 text-sm">
-          <p className="font-semibold">Rantaian sebab akibat</p>
+          <p className="font-semibold">Hipotesis untuk disahkan di tapak</p>
           <p className="mt-1 text-stone-700">
-            Air bertakung merosakkan lapisan bawah jalan. Setiap tampalan yang dibuat di atas
-            sub-base yang lembap akan gagal semula dalam beberapa minggu — itulah sebabnya{' '}
-            {c.pothole_reprate}% aduan lubang di sini adalah aduan berulang.
+            Aduan air bertakung pertama direkodkan pada <b>{c.first_water}</b>, diikuti oleh{' '}
+            <b>{c.potholes_after}</b> laporan lubang jalan di kawasan yang sama. Corak ini
+            konsisten dengan kemungkinan masalah saliran menyumbang kepada kegagalan turapan,
+            tetapi belum membuktikan sebab-akibat.
           </p>
           <p className="mt-3 font-semibold text-red-800">
-            Cadangan SiagaAI: baiki perparitan SEBELUM turap semula. Turap dahulu, dan anda membeli
-            permukaan jalan baharu yang akan gagal dengan cara yang sama.
+            Cadangan SiagaAI: periksa saliran, kecerunan dan keadaan sub-base sebelum meluluskan
+            kerja turap semula.
           </p>
         </div>
+      </Card>
 
-        <p className="mt-4 border-t border-stone-100 pt-3 text-xs text-stone-500">
-          <b>Kejujuran data:</b> kami tidak dapat membuktikan sebab-akibat daripada data ini
-          sahaja — tiada koordinat GPS untuk mengesahkan air bertakung dan lubang berada pada
-          jajaran jalan yang sama. <b>Itulah medan data yang kami cadangkan MPK tambah.</b>
+      <Card title={`Trend laporan di ${cap(c.area)}`}>
+        <div className="h-64">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={c.timeline || []} margin={{ top: 4, right: 4, bottom: 4, left: -20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" vertical={false} />
+              <XAxis dataKey="month" tick={{ fontSize: 10 }} interval={0} angle={-45} textAnchor="end" height={50} />
+              <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
+              <Tooltip />
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <Bar dataKey="water" name="Air bertakung" fill="#0369a1" radius={[3, 3, 0, 0]} />
+              <Bar dataKey="pothole" name="Lubang jalan" fill="#b91c1c" radius={[3, 3, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <p className="mt-3 border-t border-stone-100 pt-3 text-xs text-stone-500">
+          Carta ini membandingkan laporan pada tahap <b>Sub Kawasan</b>, bukan jajaran jalan yang
+          tepat. Sahkan lokasi, aset dan sejarah pembaikan sebelum menetapkan punca atau skop kerja.
         </p>
       </Card>
 
@@ -105,7 +163,8 @@ export default function RootCause({ data }) {
           </table>
         </div>
         <p className="mt-3 border-t border-stone-100 pt-3 text-xs text-stone-500">
-          Ini bukan satu anekdot — corak saliran-ke-lubang berulang di seluruh daerah.
+          Ini ialah corak berulang antara jenis aduan di beberapa kawasan, bukan bukti muktamad
+          bahawa satu isu menyebabkan isu yang lain.
         </p>
       </Card>
     </div>

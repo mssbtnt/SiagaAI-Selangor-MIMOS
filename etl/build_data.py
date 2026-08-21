@@ -173,7 +173,7 @@ def build_emerging(df: pd.DataFrame) -> list:
 
 
 def build_clusters(df: pd.DataFrame) -> list:
-    """Root-cause: drainage failure precedes pavement failure."""
+    """Candidate drainage/pavement patterns, grouped by locality rather than road segment."""
     out = []
     water = df[df["Jenis Masalah"] == WATER]
     holes = df[df["Jenis Masalah"] == POTHOLE]
@@ -181,13 +181,25 @@ def build_clusters(df: pd.DataFrame) -> list:
         h = holes[holes["Sub Kawasan"] == area]
         if len(w) < MIN_WATER or len(h) < MIN_HOLES:
             continue
+
         first_water = w.dt.min()
-        after = int((h.dt > first_water).sum())
+        water_monthly = w.groupby(w.dt.dt.to_period("M")).size()
+        pothole_monthly = h.groupby(h.dt.dt.to_period("M")).size()
+        months = water_monthly.index.union(pothole_monthly.index).sort_values()
+        timeline = [
+            dict(
+                month=str(month),
+                water=int(water_monthly.get(month, 0)),
+                pothole=int(pothole_monthly.get(month, 0)),
+            )
+            for month in months
+        ]
+
         out.append(dict(
             area=area, water_n=int(len(w)), pothole_n=int(len(h)),
-            first_water=str(first_water.date()), potholes_after=after,
-            pothole_reprate=round(100 * h.is_repeat.mean()),
-            note="Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"))
+            first_water=str(first_water.date()), potholes_after=int((h.dt > first_water).sum()),
+            pothole_reprate=round(100 * h.is_repeat.mean()), timeline=timeline,
+            note="Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"))
     return sorted(out, key=lambda x: -x["water_n"])[:MAX_CLUSTERS]
 
 

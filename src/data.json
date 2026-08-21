@@ -1689,7 +1689,79 @@
    "first_water": "2025-04-16",
    "potholes_after": 55,
    "pothole_reprate": 28,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 8
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2025-03",
+     "water": 0,
+     "pothole": 20
+    },
+    {
+     "month": "2025-04",
+     "water": 1,
+     "pothole": 11
+    },
+    {
+     "month": "2025-05",
+     "water": 1,
+     "pothole": 6
+    },
+    {
+     "month": "2025-06",
+     "water": 1,
+     "pothole": 7
+    },
+    {
+     "month": "2025-08",
+     "water": 2,
+     "pothole": 7
+    },
+    {
+     "month": "2025-09",
+     "water": 1,
+     "pothole": 4
+    },
+    {
+     "month": "2025-10",
+     "water": 1,
+     "pothole": 2
+    },
+    {
+     "month": "2025-11",
+     "water": 1,
+     "pothole": 2
+    },
+    {
+     "month": "2025-12",
+     "water": 3,
+     "pothole": 12
+    },
+    {
+     "month": "2026-01",
+     "water": 1,
+     "pothole": 7
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2026-03",
+     "water": 1,
+     "pothole": 1
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "BANDAR PARKLAND",
@@ -1698,7 +1770,79 @@
    "first_water": "2025-03-03",
    "potholes_after": 34,
    "pothole_reprate": 29,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-03",
+     "water": 4,
+     "pothole": 2
+    },
+    {
+     "month": "2025-04",
+     "water": 1,
+     "pothole": 0
+    },
+    {
+     "month": "2025-05",
+     "water": 1,
+     "pothole": 8
+    },
+    {
+     "month": "2025-06",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-07",
+     "water": 1,
+     "pothole": 4
+    },
+    {
+     "month": "2025-08",
+     "water": 1,
+     "pothole": 0
+    },
+    {
+     "month": "2025-09",
+     "water": 2,
+     "pothole": 0
+    },
+    {
+     "month": "2025-10",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-11",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-12",
+     "water": 0,
+     "pothole": 11
+    },
+    {
+     "month": "2026-01",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2026-03",
+     "water": 0,
+     "pothole": 1
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "BANDAR SULTAN SULEIMAN",
@@ -1707,7 +1851,84 @@
    "first_water": "2025-08-03",
    "potholes_after": 19,
    "pothole_reprate": 33,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 7
+    },
+    {
+     "month": "2025-03",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-04",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-05",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-06",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-07",
+     "water": 0,
+     "pothole": 7
+    },
+    {
+     "month": "2025-08",
+     "water": 2,
+     "pothole": 3
+    },
+    {
+     "month": "2025-09",
+     "water": 2,
+     "pothole": 4
+    },
+    {
+     "month": "2025-10",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-11",
+     "water": 1,
+     "pothole": 0
+    },
+    {
+     "month": "2025-12",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2026-01",
+     "water": 1,
+     "pothole": 6
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2026-03",
+     "water": 1,
+     "pothole": 1
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "BANDAR BOTANIK",
@@ -1716,7 +1937,79 @@
    "first_water": "2025-01-23",
    "potholes_after": 45,
    "pothole_reprate": 35,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 1,
+     "pothole": 10
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-03",
+     "water": 1,
+     "pothole": 7
+    },
+    {
+     "month": "2025-04",
+     "water": 1,
+     "pothole": 11
+    },
+    {
+     "month": "2025-05",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-06",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-08",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-09",
+     "water": 1,
+     "pothole": 1
+    },
+    {
+     "month": "2025-10",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-11",
+     "water": 1,
+     "pothole": 2
+    },
+    {
+     "month": "2025-12",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2026-01",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2026-03",
+     "water": 1,
+     "pothole": 2
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "BANDAR PUTERI",
@@ -1725,7 +2018,84 @@
    "first_water": "2025-02-05",
    "potholes_after": 62,
    "pothole_reprate": 45,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 5
+    },
+    {
+     "month": "2025-02",
+     "water": 2,
+     "pothole": 6
+    },
+    {
+     "month": "2025-03",
+     "water": 1,
+     "pothole": 12
+    },
+    {
+     "month": "2025-04",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2025-05",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-06",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-07",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-08",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-09",
+     "water": 1,
+     "pothole": 0
+    },
+    {
+     "month": "2025-10",
+     "water": 1,
+     "pothole": 1
+    },
+    {
+     "month": "2025-11",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-12",
+     "water": 0,
+     "pothole": 10
+    },
+    {
+     "month": "2026-01",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 5
+    },
+    {
+     "month": "2026-03",
+     "water": 0,
+     "pothole": 2
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "TAMAN KLANG UTAMA",
@@ -1734,7 +2104,84 @@
    "first_water": "2025-01-15",
    "potholes_after": 104,
    "pothole_reprate": 29,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 1,
+     "pothole": 16
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 12
+    },
+    {
+     "month": "2025-03",
+     "water": 0,
+     "pothole": 8
+    },
+    {
+     "month": "2025-04",
+     "water": 0,
+     "pothole": 14
+    },
+    {
+     "month": "2025-05",
+     "water": 2,
+     "pothole": 13
+    },
+    {
+     "month": "2025-06",
+     "water": 0,
+     "pothole": 7
+    },
+    {
+     "month": "2025-07",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2025-08",
+     "water": 1,
+     "pothole": 4
+    },
+    {
+     "month": "2025-09",
+     "water": 1,
+     "pothole": 5
+    },
+    {
+     "month": "2025-10",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-11",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-12",
+     "water": 0,
+     "pothole": 13
+    },
+    {
+     "month": "2026-01",
+     "water": 0,
+     "pothole": 8
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2026-03",
+     "water": 0,
+     "pothole": 1
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "BANDAR BUKIT TINGGI",
@@ -1743,7 +2190,79 @@
    "first_water": "2025-11-28",
    "potholes_after": 20,
    "pothole_reprate": 46,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 5
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 9
+    },
+    {
+     "month": "2025-03",
+     "water": 0,
+     "pothole": 5
+    },
+    {
+     "month": "2025-04",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2025-05",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-06",
+     "water": 0,
+     "pothole": 5
+    },
+    {
+     "month": "2025-07",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-09",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-10",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-11",
+     "water": 1,
+     "pothole": 7
+    },
+    {
+     "month": "2025-12",
+     "water": 1,
+     "pothole": 7
+    },
+    {
+     "month": "2026-01",
+     "water": 0,
+     "pothole": 7
+    },
+    {
+     "month": "2026-02",
+     "water": 1,
+     "pothole": 1
+    },
+    {
+     "month": "2026-03",
+     "water": 1,
+     "pothole": 4
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "BANDAR KLANG",
@@ -1752,7 +2271,64 @@
    "first_water": "2025-05-06",
    "potholes_after": 26,
    "pothole_reprate": 0,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 7
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-03",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2025-04",
+     "water": 0,
+     "pothole": 11
+    },
+    {
+     "month": "2025-05",
+     "water": 2,
+     "pothole": 8
+    },
+    {
+     "month": "2025-07",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-08",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-11",
+     "water": 0,
+     "pothole": 5
+    },
+    {
+     "month": "2025-12",
+     "water": 2,
+     "pothole": 4
+    },
+    {
+     "month": "2026-01",
+     "water": 0,
+     "pothole": 6
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 2
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "JALAN KAPAR",
@@ -1761,7 +2337,64 @@
    "first_water": "2025-03-17",
    "potholes_after": 17,
    "pothole_reprate": 52,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-03",
+     "water": 1,
+     "pothole": 3
+    },
+    {
+     "month": "2025-04",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-05",
+     "water": 1,
+     "pothole": 3
+    },
+    {
+     "month": "2025-07",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-08",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-10",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-11",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-12",
+     "water": 2,
+     "pothole": 1
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2026-03",
+     "water": 0,
+     "pothole": 1
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "TAMAN ENG ANN",
@@ -1770,7 +2403,49 @@
    "first_water": "2025-01-03",
    "potholes_after": 17,
    "pothole_reprate": 50,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 1,
+     "pothole": 4
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-03",
+     "water": 1,
+     "pothole": 1
+    },
+    {
+     "month": "2025-08",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-12",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2026-01",
+     "water": 2,
+     "pothole": 1
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2026-03",
+     "water": 0,
+     "pothole": 1
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   },
   {
    "area": "TAMAN KLANG JAYA",
@@ -1779,7 +2454,74 @@
    "first_water": "2025-03-19",
    "potholes_after": 26,
    "pothole_reprate": 45,
-   "note": "Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"
+   "timeline": [
+    {
+     "month": "2025-01",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-02",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-03",
+     "water": 1,
+     "pothole": 1
+    },
+    {
+     "month": "2025-04",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-05",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2025-06",
+     "water": 2,
+     "pothole": 4
+    },
+    {
+     "month": "2025-07",
+     "water": 0,
+     "pothole": 4
+    },
+    {
+     "month": "2025-08",
+     "water": 0,
+     "pothole": 5
+    },
+    {
+     "month": "2025-09",
+     "water": 0,
+     "pothole": 3
+    },
+    {
+     "month": "2025-11",
+     "water": 0,
+     "pothole": 2
+    },
+    {
+     "month": "2025-12",
+     "water": 0,
+     "pothole": 1
+    },
+    {
+     "month": "2026-01",
+     "water": 1,
+     "pothole": 1
+    },
+    {
+     "month": "2026-02",
+     "water": 0,
+     "pothole": 2
+    }
+   ],
+   "note": "Corak laporan air bertakung dan kerosakan turapan yang perlu disahkan di tapak"
   }
  ],
  "geo": []
