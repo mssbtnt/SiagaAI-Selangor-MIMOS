@@ -22,7 +22,7 @@ export default function RootCause({ data }) {
       <div>
         <h2 className="text-xl font-bold">Punca sistemik: saliran → lubang jalan</h2>
         <p className="mt-1 max-w-3xl text-sm text-stone-600">
-          Papan pemuka biasa berkata "kawasan ini banyak lubang". NADI berkata{' '}
+          Papan pemuka biasa berkata "kawasan ini banyak lubang". SiagaAI berkata{' '}
           <b>kenapa lubang itu sentiasa kembali</b>.
         </p>
       </div>
@@ -69,7 +69,7 @@ export default function RootCause({ data }) {
             {c.pothole_reprate}% aduan lubang di sini adalah aduan berulang.
           </p>
           <p className="mt-3 font-semibold text-red-800">
-            Cadangan NADI: baiki perparitan SEBELUM turap semula. Turap dahulu, dan anda membeli
+            Cadangan SiagaAI: baiki perparitan SEBELUM turap semula. Turap dahulu, dan anda membeli
             permukaan jalan baharu yang akan gagal dengan cara yang sama.
           </p>
         </div>

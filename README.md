@@ -1,7 +1,7 @@
-# NADI Klang — Sistem Intelijen Aduan Jalan
+# SiagaAI Selangor — Sistem Intelijen Aduan Jalan
 **Selangor AI Hackathon 2026** · Team MIMOS
 
-AI complaint-intelligence for Majlis Perbandaran Klang road defects.
+AI complaint-intelligence for road defects. Pilot deployment: Majlis Perbandaran Klang.
 `Detect → Understand → Prioritise → Recommend → Act`
 
 ## The finding
@@ -29,10 +29,10 @@ npm run dev
 ```bash
 pip install pandas openpyxl
 # put JALAN 2025.xlsx + JALAN 2026.xlsx in etl/raw/
-python etl/build_data.py     # -> src/data.json + etl/nadi.db
+python etl/build_data.py     # -> src/data.json + etl/siaga.db
 ```
 
-The ETL writes SQLite (`etl/nadi.db`); the app reads the precomputed `src/data.json`
+The ETL writes SQLite (`etl/siaga.db`); the app reads the precomputed `src/data.json`
 cache for zero-latency demo rendering.
 
 ## Team
