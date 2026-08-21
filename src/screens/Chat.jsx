@@ -1,4 +1,4 @@
-// LANE 5 — Ask NADI. Owner: Lane 5 only.
+// LANE 5 — Ask SiagaAI. Owner: Lane 5 only.
 //
 // CANNED FIRST, LIVE SECOND. These four answers must work with the network
 // unplugged. Only wire the real API if you are ahead at 11:10.
@@ -33,7 +33,7 @@ export default function Chat({ data }) {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-xl font-bold">Ask NADI</h2>
+        <h2 className="text-xl font-bold">Ask SiagaAI</h2>
         <p className="mt-1 max-w-3xl text-sm text-stone-600">
           Soalan bahasa biasa di atas data agregat. Data kekal di dalam sistem MPK — hanya
           jadual agregat yang diproses, tiada rekod individu.

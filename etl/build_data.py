@@ -1,6 +1,6 @@
 """
-NADI ETL — LANE 1 OWNS THIS FILE.
-Reads JALAN 2025 + JALAN 2026 -> src/data.json (+ etl/nadi.db)
+SiagaAI ETL — LANE 1 OWNS THIS FILE.
+Reads JALAN 2025 + JALAN 2026 -> src/data.json (+ etl/siaga.db)
 
 Usage:  python etl/build_data.py
 Deps :  pip install pandas openpyxl
@@ -13,7 +13,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "etl" / "raw"          # put JALAN 2025.xlsx / JALAN 2026.xlsx here
 OUT = ROOT / "src" / "data.json"
-DB = ROOT / "etl" / "nadi.db"
+DB = ROOT / "etl" / "siaga.db"
 
 # Reference date for ageing. Bump if the dataset is extended.
 NOW = pd.Timestamp("2026-04-01")

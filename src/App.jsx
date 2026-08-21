@@ -19,7 +19,7 @@ const TABS = [
   { id: 'action', label: 'Action Centre' },
   { id: 'root', label: 'Root Cause' },
   { id: 'map', label: 'Map' },
-  { id: 'chat', label: 'Ask NADI' },
+  { id: 'chat', label: 'Ask SiagaAI' },
 ]
 
 export default function App() {
@@ -36,9 +36,9 @@ export default function App() {
           <div className="flex items-center gap-3">
             <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-red-800 to-amber-500" />
             <div>
-              <h1 className="text-xl font-bold tracking-tight">NADI Klang</h1>
+              <h1 className="text-xl font-bold tracking-tight">SiagaAI Selangor</h1>
               <p className="text-xs text-stone-500">
-                Sistem Intelijen Aduan Jalan &middot; MPK &middot; Selangor AI Hackathon 2026
+                Sistem Intelijen Aduan Jalan &middot; Perintis: MPK Klang &middot; Selangor AI Hackathon 2026
               </p>
             </div>
           </div>
