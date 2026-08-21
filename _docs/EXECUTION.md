@@ -1,6 +1,12 @@
-# NADI — Execution Blueprint
-**Repo:** `github.com/mssbtnt/nadi-ai-selangor-mimos` · **Team:** 5 devs · **Freeze:** 11:25 · **Submit:** 11:50
+# SiagaAI Selangor — Execution Blueprint *(hackathon record)*
+**Repo:** `github.com/mssbtnt/SiagaAI-Selangor-MIMOS` · **Team:** 5 devs · **Freeze:** 11:25 · **Submit:** 11:50
 **Dataset: ROADS ONLY — `JALAN 2025.xlsx` + `JALAN 2026.xlsx`. Ignore all LAMPU files.**
+
+> ⚠️ **Superseded as a work plan.** This is the blueprint as written during the hackathon, kept for
+> the scoring model (§5 Lane 1), the playbook mapping, the verified figures (§7) and the demo
+> script (§8). The lane assignments, checkpoint times and the product name *NADI* are historical —
+> the system is now **SiagaAI Selangor** and the remaining work is split into four packages (A–D).
+> The §3 file-ownership rule still applies and still prevents the worst merge conflicts.
 
 > **Read only your lane (§5).** Everything else is reference. Total read time: 90 seconds.
 
@@ -45,11 +51,11 @@ export default defineConfig({ plugins: [react(), tailwindcss()] })
 
 Then:
 ```bash
-git init && git remote add origin https://github.com/mssbtnt/nadi-ai-selangor-mimos.git
+git init && git remote add origin https://github.com/mssbtnt/SiagaAI-Selangor-MIMOS.git
 git add -A && git commit -m "bootstrap" && git branch -M main && git push -u origin main
 ```
 
-**Everyone else:** `git clone https://github.com/mssbtnt/nadi-ai-selangor-mimos.git && cd nadi && npm i && npm run dev`
+**Everyone else:** `git clone https://github.com/mssbtnt/SiagaAI-Selangor-MIMOS.git && cd SiagaAI-Selangor-MIMOS && npm i && npm run dev`
 
 ---
 

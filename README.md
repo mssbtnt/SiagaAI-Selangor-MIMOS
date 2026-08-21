@@ -37,7 +37,9 @@ cache for zero-latency demo rendering.
 
 ## Team
 
-See **EXECUTION.md** — lane assignments, file ownership, checkpoints.
+See **[_docs/EXECUTION.md](_docs/EXECUTION.md)** — the original hackathon blueprint, kept as a
+record of the scoring model, playbook mapping and verified figures. Current work is split into
+four packages (A–D) with the file-ownership map carried over from §3.
 **Read only your lane (§5).**
 
 ## Data
