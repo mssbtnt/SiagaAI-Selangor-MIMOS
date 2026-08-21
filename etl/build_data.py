@@ -15,8 +15,25 @@ RAW = ROOT / "etl" / "raw"          # put JALAN 2025.xlsx / JALAN 2026.xlsx here
 OUT = ROOT / "src" / "data.json"
 DB = ROOT / "etl" / "siaga.db"
 
-# Reference date for ageing. Bump if the dataset is extended.
-NOW = pd.Timestamp("2026-04-01")
+# --- Thresholds -------------------------------------------------------------
+# A cluster needs enough of both signals before a drainage->pavement claim is
+# fair. See _docs/DECISIONS.md D2.
+MIN_WATER = 4
+MIN_HOLES = 10
+MAX_CLUSTERS = 20
+# An emerging cluster needs a real recent count, not one or two complaints.
+MIN_RECENT = 4
+MAX_EMERGING = 15
+# Hotspot scoring needs a minimum group size to be meaningful.
+MIN_HOTSPOT_N = 3
+MAX_HOTSPOTS = 60
+# Backlog ageing cutoff, in days.
+STALE_DAYS = 180
+
+# Potholes are BERLUBANG only. ROSAK/MENDAP is attributed to utility cuts in
+# PLAYBOOK below, so folding it in would contradict our own root cause.
+POTHOLE = "BERLUBANG"
+WATER = "AIR BERTAKUNG"
 
 RISK = {
     "BERLUBANG": 1.0, "JAMBATAN": 1.0, "JEJAMBAT/TITI": 1.0,
@@ -78,7 +95,6 @@ def load(path: Path, year: str) -> pd.DataFrame:
     df["is_repeat"] = df["depth"] > 0
     df["status"] = df["Tindakan"].fillna("Belum Diproses")
     df["is_open"] = ~df["status"].isin(["Selesai", "Batal"])
-    df["age_days"] = (NOW - df["dt"]).dt.days
     df["risk"] = df["Jenis Masalah"].map(RISK).fillna(0.5)
     return df
 
@@ -94,12 +110,12 @@ def build_hotspots(df: pd.DataFrame) -> list:
                 depth=("depth", "max"), open_n=("is_open", "sum"),
                 first=("dt", "min"), last=("dt", "max"), risk=("risk", "max"))
            .reset_index())
-    g = g[g.n >= 3].copy()
+    g = g[g.n >= MIN_HOTSPOT_N].copy()
     g["reprate"] = g.reps / g.n
     g["backlog"] = g.open_n / g.n
     g["score"] = (0.30 * norm(np.log1p(g.n)) + 0.25 * g.reprate
                   + 0.15 * norm(g.depth) + 0.15 * g.backlog + 0.15 * g.risk) * 100
-    g = g.sort_values("score", ascending=False).head(60)
+    g = g.sort_values("score", ascending=False).head(MAX_HOTSPOTS)
 
     out = []
     for i, r in enumerate(g.itertuples(), 1):
@@ -114,47 +130,56 @@ def build_hotspots(df: pd.DataFrame) -> list:
 
 
 def build_emerging(df: pd.DataFrame) -> list:
-    """Acceleration, not volume: recent 60d vs prior 60d."""
-    end = df.dt.max()
-    recent = df[df.dt > end - pd.Timedelta(days=60)]
-    prior = df[(df.dt <= end - pd.Timedelta(days=60)) & (df.dt > end - pd.Timedelta(days=120))]
-    r = recent.groupby(["Sub Kawasan", "Jenis Masalah"]).size()
-    p = prior.groupby(["Sub Kawasan", "Jenis Masalah"]).size()
-    j = pd.concat([r.rename("recent_n"), p.rename("prior_n")], axis=1).fillna(0)
-    j = j[j.recent_n >= 4]
+    """Acceleration, not volume: Q1 2026 vs Q1 2025 per locality x issue.
+
+    The previous window (last 60 days vs prior 60) sat squarely on the 2026
+    intake decline — Jan 301, Feb 176, Mar 112 — so it ranked *falling* clusters
+    as though they were surging: 12 of its 14 rows were negative. Same-quarter
+    year-over-year is the comparison the headline already rests on, and it is
+    unaffected by that trend for the same reason the headline is. See
+    _docs/DECISIONS.md D3.
+    """
+    q1 = df[df.dt.dt.quarter == 1]
+    cur = q1[q1.year == "2026"].groupby(["Sub Kawasan", "Jenis Masalah"]).size()
+    prior = q1[q1.year == "2025"].groupby(["Sub Kawasan", "Jenis Masalah"]).size()
+    j = pd.concat([cur.rename("recent_n"), prior.rename("prior_n")], axis=1).fillna(0)
+    j = j[j["recent_n"] >= MIN_RECENT].copy()
+
     # NB: bracket access — `.pct_change` collides with the DataFrame method.
+    j["is_new"] = j["prior_n"] == 0
     j["pct_change"] = ((j["recent_n"] - j["prior_n"]) / j["prior_n"].replace(0, np.nan) * 100)
-    j["pct_change"] = j["pct_change"].fillna(999)
-    j = j.sort_values("pct_change", ascending=False).head(15).reset_index()
-    return [dict(area=x[0], issue=x[1], recent_n=int(x[2]), prior_n=int(x[3]),
-                 pct_change=round(float(x[4]))) for x in j.itertuples(index=False)]
+    # Keep only clusters that actually grew. A cluster with no Q1-2025 baseline
+    # has no percentage to report — it is flagged as new instead of given a
+    # sentinel figure the UI would have to special-case.
+    j = j[j["is_new"] | (j["pct_change"] > 0)]
+    # Rank new clusters by their own volume, above every measurable increase.
+    j["rank"] = np.where(j["is_new"], np.inf, j["pct_change"])
+    j = j.sort_values(["rank", "recent_n"], ascending=False).head(MAX_EMERGING).reset_index()
+
+    # Explicit column access — itertuples renames "Sub Kawasan" positionally and
+    # the offset shifts with index=True/False, which is easy to get silently wrong.
+    return [dict(area=r["Sub Kawasan"], issue=r["Jenis Masalah"],
+                 recent_n=int(r["recent_n"]), prior_n=int(r["prior_n"]),
+                 is_new=bool(r["is_new"]),
+                 pct_change=None if r["is_new"] else round(float(r["pct_change"])))
+            for r in j.to_dict("records")]
 
 
-def build_forecast(df: pd.DataFrame) -> list:
-    """Seasonal-naive + linear trend. NOT Prophet — 12 points can't support it.
-    Label the chart: 'indicative trend, not a statistical forecast'."""
-    m = df.groupby(df.dt.dt.to_period("M")).size()
-    hist = [dict(month=str(k), actual=int(v), predicted=None) for k, v in m.items()]
-    y = m.values.astype(float)
-    if len(y) >= 4:
-        slope = np.polyfit(np.arange(len(y)), y, 1)[0]
-        base = y[-3:].mean()
-        last = m.index[-1]
-        for i in range(1, 4):
-            pred = max(0, base + slope * i)
-            hist.append(dict(month=str(last + i), actual=None, predicted=round(pred),
-                             lo=round(pred * 0.7), hi=round(pred * 1.3)))
-    return hist
+# build_forecast was removed. Fifteen monthly points cannot support a projection,
+# and the intake decline made the output actively misleading — it predicted 192
+# for April immediately after an actual 112. Seasonality is the only real signal
+# and it is already legible in the actuals: December 333 against September 125.
+# See _docs/DECISIONS.md D4.
 
 
 def build_clusters(df: pd.DataFrame) -> list:
     """Root-cause: drainage failure precedes pavement failure."""
     out = []
-    water = df[df["Jenis Masalah"] == "AIR BERTAKUNG"]
-    holes = df[df["Jenis Masalah"].isin(["BERLUBANG", "ROSAK/MENDAP"])]
+    water = df[df["Jenis Masalah"] == WATER]
+    holes = df[df["Jenis Masalah"] == POTHOLE]
     for area, w in water.groupby("Sub Kawasan"):
         h = holes[holes["Sub Kawasan"] == area]
-        if len(w) < 4 or len(h) < 10:
+        if len(w) < MIN_WATER or len(h) < MIN_HOLES:
             continue
         first_water = w.dt.min()
         after = int((h.dt > first_water).sum())
@@ -163,7 +188,18 @@ def build_clusters(df: pd.DataFrame) -> list:
             first_water=str(first_water.date()), potholes_after=after,
             pothole_reprate=round(100 * h.is_repeat.mean()),
             note="Saliran gagal mendahului kegagalan turapan — baiki perparitan sebelum turap semula"))
-    return sorted(out, key=lambda x: -x["water_n"])[:10]
+    return sorted(out, key=lambda x: -x["water_n"])[:MAX_CLUSTERS]
+
+
+def count_water_pothole_localities(df: pd.DataFrame) -> int:
+    """Localities carrying BOTH signals at any volume — the '62 kawasan' claim.
+
+    Deliberately unfiltered: build_clusters applies MIN_WATER/MIN_HOLES to pick
+    defensible examples, but the systemic-pattern claim rests on how widespread
+    the pairing is, not on how many clear the evidence bar.
+    """
+    areas = df.groupby("Sub Kawasan")["Jenis Masalah"].agg(set)
+    return int(sum(1 for s in areas if WATER in s and POTHOLE in s))
 
 
 def main():
@@ -174,6 +210,11 @@ def main():
                          + f"\nPut the two xlsx files in {RAW}")
 
     df = pd.concat([load(p, y) for y, p in files.items()], ignore_index=True)
+
+    # Age everything against the day after the last complaint, rather than a
+    # hardcoded date that silently goes stale when the dataset is extended.
+    now = df.dt.max() + pd.Timedelta(days=1)
+    df["age_days"] = (now - df.dt).dt.days
 
     # --- Q1 vs Q1, the headline ---
     def slice_q1(sub):
@@ -186,7 +227,7 @@ def main():
         y2025=int((df.year == "2025").sum()), y2026=int((df.year == "2026").sum()),
         repeat_rate=round(100 * df.is_repeat.mean(), 1),
         open_total=int(df.is_open.sum()),
-        open_over180=int(((df.age_days > 180) & df.is_open).sum()),
+        open_over180=int(((df.age_days > STALE_DAYS) & df.is_open).sum()),
         blank_status=int((df.status == "Belum Diproses").sum()),
         areas=int(df["Sub Kawasan"].nunique()), duns=int(df["DUN"].nunique()),
         max_depth=int(df.depth.max()),
@@ -199,15 +240,16 @@ def main():
                      for k, v in sub.groupby(sub.dt.dt.to_period("M")).size().items()]
                  for y, sub in df.groupby("year")},
         top_areas=[dict(area=k, n=int(v)) for k, v in df["Sub Kawasan"].value_counts().head(25).items()],
+        water_pothole_areas=count_water_pothole_localities(df),
+        as_of=str(df.dt.max().date()),
     )
 
     payload = dict(
         meta=meta,
         hotspots=build_hotspots(df),
         emerging=build_emerging(df),
-        forecast=build_forecast(df),
         clusters=build_clusters(df),
-        geo=[],  # LANE 3 fills this from etl/locality_geo.csv
+        geo=[],  # Package A fills this from etl/locality_geo.csv
     )
 
     OUT.parent.mkdir(parents=True, exist_ok=True)

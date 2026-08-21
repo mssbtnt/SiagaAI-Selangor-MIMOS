@@ -27,10 +27,21 @@ npm run dev
 ## Rebuild the data
 
 ```bash
-pip install pandas openpyxl
-# put JALAN 2025.xlsx + JALAN 2026.xlsx in etl/raw/
-python etl/build_data.py     # -> src/data.json + etl/siaga.db
+python -m venv .venv
+.venv/Scripts/python.exe -m pip install pandas openpyxl   # Windows
+# .venv/bin/python -m pip install pandas openpyxl         # macOS / Linux
+
+# JALAN 2025.xlsx + JALAN 2026.xlsx already live in etl/raw/
+.venv/Scripts/python.exe etl/build_data.py    # -> src/data.json + etl/siaga.db
 ```
+
+> **Windows gotcha:** if `python --version` opens the Microsoft Store, `python.exe` on your
+> PATH is the Store stub, not an interpreter. A real install usually sits at
+> `%LOCALAPPDATA%\Programs\Python\Python3xx\python.exe` — use that full path to create the venv.
+
+Verified on Python 3.12 / pandas 3.0. The ETL is deterministic: re-running it on unchanged
+inputs reproduces `src/data.json` byte for byte, so a noisy diff means an input or a rule
+changed, not the run.
 
 The ETL writes SQLite (`etl/siaga.db`); the app reads the precomputed `src/data.json`
 cache for zero-latency demo rendering.

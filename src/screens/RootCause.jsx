@@ -50,7 +50,7 @@ export default function RootCause({ data }) {
         <div className="mt-5 grid gap-4 sm:grid-cols-4">
           {[
             [c.water_n, 'Aduan air bertakung'],
-            [c.pothole_n, 'Aduan lubang / mendap'],
+            [c.pothole_n, 'Aduan lubang jalan'],
             [c.first_water, 'Aduan air pertama'],
             [c.potholes_after, 'Lubang selepas tarikh itu'],
           ].map(([v, l]) => (
@@ -81,14 +81,14 @@ export default function RootCause({ data }) {
         </p>
       </Card>
 
-      <Card title={`Corak yang sama dikesan di ${data.clusters.length} kawasan`}>
+      <Card title={`Corak yang sama dikesan di ${data.meta.water_pothole_areas} kawasan`}>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] text-sm">
             <thead>
               <tr className="border-b border-stone-200 text-left text-xs uppercase tracking-wider text-stone-500">
                 <th className="px-3 py-2">Kawasan</th>
                 <th className="px-3 py-2 text-right">Air bertakung</th>
-                <th className="px-3 py-2 text-right">Lubang / mendap</th>
+                <th className="px-3 py-2 text-right">Lubang jalan</th>
                 <th className="px-3 py-2 text-right">% berulang</th>
               </tr>
             </thead>
