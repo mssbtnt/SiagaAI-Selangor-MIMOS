@@ -37,9 +37,13 @@ cache for zero-latency demo rendering.
 
 ## Team
 
-See **[_docs/EXECUTION.md](_docs/EXECUTION.md)** — the original hackathon blueprint, kept as a
-record of the scoring model, playbook mapping and verified figures. Current work is split into
-four packages (A–D) with the file-ownership map carried over from §3.
+See **[_docs/DECISIONS.md](_docs/DECISIONS.md)** first — D1–D5 are settled, and each entry says
+what it changes for your package.
+
+**[_docs/EXECUTION.md](_docs/EXECUTION.md)** is the original hackathon blueprint, kept as a record
+of the scoring model, playbook mapping and verified figures. Current work is split into four
+packages (A–D) with the file-ownership map carried over from §3. Where the two disagree,
+DECISIONS.md wins.
 **Read only your lane (§5).**
 
 ## Data
