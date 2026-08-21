@@ -1,0 +1,206 @@
+{
+ "dun_join": [
+  {
+   "code": "N40",
+   "name": "Kota Anggerik",
+   "count": 23,
+   "geo_code": "N40",
+   "method": "name",
+   "faithful": true
+  },
+  {
+   "code": "N41",
+   "name": "Batu Tiga",
+   "count": 19,
+   "geo_code": "N41",
+   "method": "name",
+   "faithful": true
+  },
+  {
+   "code": "N42",
+   "name": "Meru",
+   "count": 389,
+   "geo_code": "N42",
+   "method": "name",
+   "faithful": true
+  },
+  {
+   "code": "N43",
+   "name": "Sementa",
+   "count": 188,
+   "geo_code": "N43",
+   "method": "name",
+   "faithful": true
+  },
+  {
+   "code": "N44",
+   "name": "Selat Klang",
+   "count": 270,
+   "geo_code": "N44",
+   "method": "none",
+   "faithful": false
+  },
+  {
+   "code": "N45",
+   "name": "Bandar Baru Klang",
+   "count": 740,
+   "geo_code": "N45",
+   "method": "none",
+   "faithful": false
+  },
+  {
+   "code": "N46",
+   "name": "Pelabuhan Klang",
+   "count": 369,
+   "geo_code": "N46",
+   "method": "name",
+   "faithful": true
+  },
+  {
+   "code": "N47",
+   "name": "Pandamaran",
+   "count": 300,
+   "geo_code": "N47",
+   "method": "name",
+   "faithful": true
+  },
+  {
+   "code": "N48",
+   "name": "Sentosa",
+   "count": 561,
+   "geo_code": "N48",
+   "method": "none",
+   "faithful": false
+  },
+  {
+   "code": "N49",
+   "name": "Sungai Kandis",
+   "count": 345,
+   "geo_code": "N49",
+   "method": "code",
+   "faithful": false
+  }
+ ],
+ "pins": [
+  {
+   "locality": "BANDAR BUKIT RAJA",
+   "lat": 3.0852015,
+   "lng": 101.437697,
+   "n": 159
+  },
+  {
+   "locality": "TAMAN KLANG UTAMA",
+   "lat": 3.0861208,
+   "lng": 101.4176917,
+   "n": 151
+  },
+  {
+   "locality": "PELABUHAN KLANG",
+   "lat": 2.9996963,
+   "lng": 101.3913589,
+   "n": 121
+  },
+  {
+   "locality": "BANDAR BUKIT TINGGI",
+   "lat": 2.9933052,
+   "lng": 101.4459046,
+   "n": 102
+  },
+  {
+   "locality": "BANDAR PUTERI",
+   "lat": 2.9853027,
+   "lng": 101.462053,
+   "n": 95
+  },
+  {
+   "locality": "BANDAR BUKIT TINGGI 2",
+   "lat": 2.9965568,
+   "lng": 101.4361988,
+   "n": 91
+  },
+  {
+   "locality": "BANDAR KLANG",
+   "lat": 2.9887974,
+   "lng": 101.4669596,
+   "n": 85
+  },
+  {
+   "locality": "BANDAR BOTANIK",
+   "lat": 2.9881477,
+   "lng": 101.4399293,
+   "n": 84
+  },
+  {
+   "locality": "BANDAR SULTAN SULEIMAN",
+   "lat": 3.0312145,
+   "lng": 101.3793513,
+   "n": 67
+  },
+  {
+   "locality": "JALAN MERU",
+   "lat": 3.0590562,
+   "lng": 101.4520586,
+   "n": 53
+  },
+  {
+   "locality": "BANDAR PUTERA 2",
+   "lat": 2.9692362,
+   "lng": 101.5068622,
+   "n": 50
+  },
+  {
+   "locality": "PULAU INDAH",
+   "lat": 2.9401104,
+   "lng": 101.3272918,
+   "n": 49
+  },
+  {
+   "locality": "BANDAR BARU KLANG",
+   "lat": 3.0616002,
+   "lng": 101.4652968,
+   "n": 44
+  },
+  {
+   "locality": "JALAN KAPAR",
+   "lat": 3.0789897,
+   "lng": 101.4059373,
+   "n": 43
+  },
+  {
+   "locality": "TAMAN BAYU PERDANA",
+   "lat": 3.0169609,
+   "lng": 101.4358213,
+   "n": 43
+  },
+  {
+   "locality": "TAMAN CHI LIUNG",
+   "lat": 3.0227411,
+   "lng": 101.4339133,
+   "n": 39
+  },
+  {
+   "locality": "TAMAN KLANG JAYA",
+   "lat": 3.0053403,
+   "lng": 101.4460007,
+   "n": 38
+  },
+  {
+   "locality": "TAMAN ENG ANN",
+   "lat": 3.058239,
+   "lng": 101.4600117,
+   "n": 36
+  },
+  {
+   "locality": "ANDALAS",
+   "lat": 3.0161014,
+   "lng": 101.4407696,
+   "n": 34
+  },
+  {
+   "locality": "TELOK GONG",
+   "lat": 2.9714357,
+   "lng": 101.4022346,
+   "n": 33
+  }
+ ]
+}
