@@ -1,7 +1,8 @@
 // LANE 2 — Command Centre. Owner: Lane 2 only.
 import { Card, Stat, Bar, cap } from '../ui'
 import {
-  BarChart, Bar as RBar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
+  BarChart, Bar as RBar, CartesianGrid, ComposedChart, Legend, Line,
+  ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts'
 
 export default function Home({ data, go }) {
@@ -10,6 +11,9 @@ export default function Home({ data, go }) {
     ...(m.monthly['2025'] || []),
     ...(m.monthly['2026'] || []),
   ].map((x) => ({ month: x.m, n: x.n }))
+  const forecast = data.forecast || []
+  const peak = monthly.reduce((best, item) => (item.n > best.n ? item : best), monthly[0])
+  const low = monthly.reduce((best, item) => (item.n < best.n ? item : best), monthly[0])
 
   const issues = Object.entries(m.issues).slice(0, 8)
   const maxIssue = issues[0]?.[1] || 1
@@ -90,7 +94,7 @@ export default function Home({ data, go }) {
         />
       </div>
 
-      {/* ---------- TREND ---------- */}
+      {/* ---------- TRENDS ---------- */}
       <Card title="Aduan bulanan — 2025 hingga Suku 1 2026">
         <div className="h-56">
           <ResponsiveContainer width="100%" height="100%">
@@ -99,13 +103,33 @@ export default function Home({ data, go }) {
               <XAxis dataKey="month" tick={{ fontSize: 10 }} interval={0} angle={-45} textAnchor="end" height={50} />
               <YAxis tick={{ fontSize: 11 }} />
               <Tooltip />
-              <RBar dataKey="n" fill="#9a3412" radius={[3, 3, 0, 0]} />
+              <RBar dataKey="n" name="Aduan" fill="#9a3412" radius={[3, 3, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
         <p className="mt-3 border-t border-stone-100 pt-3 text-xs text-stone-500">
-          Puncak Disember 2025 (333) berbanding paras terendah September (125) — 2.7×. Monsun
-          menyebabkan lubang meletus, jadi kerja turap semula perlu siap <b>sebelum Oktober</b>.
+          Puncak {peak?.month} ({peak?.n}) berbanding paras terendah {low?.month} ({low?.n}).
+          Corak ini membantu jabatan menjadualkan kerja pencegahan sebelum permintaan meningkat.
+        </p>
+      </Card>
+
+      <Card title="Unjuran aduan — tiga bulan akan datang">
+        <div className="h-56">
+          <ResponsiveContainer width="100%" height="100%">
+            <ComposedChart data={forecast} margin={{ top: 4, right: 4, bottom: 4, left: -20 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e7e5e4" vertical={false} />
+              <XAxis dataKey="month" tick={{ fontSize: 10 }} interval={0} angle={-45} textAnchor="end" height={50} />
+              <YAxis tick={{ fontSize: 11 }} />
+              <Tooltip />
+              <Legend wrapperStyle={{ fontSize: 11 }} />
+              <RBar dataKey="actual" name="Aduan sebenar" fill="#9a3412" radius={[3, 3, 0, 0]} />
+              <Line dataKey="predicted" name="Unjuran" stroke="#0f766e" strokeWidth={3} dot />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+        <p className="mt-3 border-t border-stone-100 pt-3 text-xs text-stone-500">
+          <b>Unjuran indikatif, bukan ramalan muktamad.</b> Ia menggunakan purata tiga bulan
+          terkini dan arah aliran sejarah untuk membantu perancangan kapasiti awal.
         </p>
       </Card>
 
